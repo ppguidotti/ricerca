@@ -1,0 +1,12 @@
+Prossimo obiettivo:
+fare repository github per condividere il lavoro
+
+fare una vagrant-file che crea più maccchine virtuali ognuna che è un container nel cluster kubernetes.
+
+Poi tramite kube-spray interfacciarsi da host verso di loro.
+
+
+kube-flow-> insieme di servizi che estendono kubernetes e lo specializzano per il ciclo di vita di pipeline di machine-learning.
+	    per pipeline intendiamo processi di sviluppo 
+
+

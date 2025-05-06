@@ -1,0 +1,73 @@
+PRIMO PASSO DA FARE:
+k3d kubeconfig get mio-cluster > /home/vagrant/.kube/config
+per copiare le info del cluster dentro il file di configurazione, altrimenti non funziona
+
+per accedere da host all'interfaccia visuale dalla quale si possono vedere i cambiamenti del cluster
+
+PER AVVIARE LA DASHBOARD:
+da VM:
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+
+per fare l'apply della dashboard:
+
+creare il profilo di accesso:
+nano dashboard-admin.yaml
+
+e incollarci dentro:
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: admin-user
+  namespace: kubernetes-dashboard
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: admin-user
+  namespace: kubernetes-dashboard
+
+
+applicare il profilo tramite:
+kubectl apply -f dashboard-admin.yaml
+
+
+generare il codice di accesso e copiarselo attraverso: 
+kubectl -n kubernetes-dashboard create token admin-user
+
+DA HOST:
+su nuovo terminale:
+
+vagrant ssh -- -L 8001:localhost:8001
+
+per fare il port-forwarding all VM (inoltra le richieste fatte a localhost all'ip della VM) (serve altrimenti i browser bloccano l'ip)
+
+e fare:
+kubectl proxy --address='0.0.0.0' --accept-hosts='.*'
+
+per estendere l'accesso al proxy ad altre macchine e non solo a localhost
+
+a questo punto basta connettersi a 
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/deployment?namespace=kubernetes-dashboard
+
+e incollare il token prima copiato
+
+
+
+
+
+
+
+
+
+
+
+
+
