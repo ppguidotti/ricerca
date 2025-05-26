@@ -1,0 +1,25 @@
+Obiettivo finale:
+creare una risorsa grafica che permette a chi vuole di mettere dentro dati e farci la pipeline di ML.
+
+Da fare da ora:
+implementare e far funzionare una pipeline creata da me.
+object detection va bene:
+prima farla di codice, poi bisognerebbe 
+
+onxx è uno standard di rappresentazione dei modelli se tensorflow lo supporta 
+è utile perchè poi l'utente usa questo formato e ignora il resto
+
+fare io una pipeline di prova, con i componenti basici.
+indagare come fa kubeflow a generare la pipeline.
+
+
+ricordati di mandare public key ssh e risorse necessarie.
+
+devo fare un documento online dove traccio ciò che faccio:
+passo per passo.
+
+
+entro: mercoledi 4
+
+
+

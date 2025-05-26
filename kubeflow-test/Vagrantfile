@@ -1,0 +1,31 @@
+
+Vagrant.configure("2") do |config|
+  # Usa Ubuntu 22.04 LTS come box base
+  config.vm.box = "ubuntu/jammy64"
+  
+  # Nome della VM
+  config.vm.hostname = "kubeflow-vm"
+  
+  # Configurazione rete
+  config.vm.network "private_network", type: "dhcp"
+  # Forward della porta per accedere alla dashboard Kubeflow
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
+  
+  # Configurazione provider (VirtualBox)
+  config.vm.provider "virtualbox" do |vb|
+    # Nome visualizzato nella UI di VirtualBox
+    vb.name = "kubeflow-vm"
+    
+    # Assegna memoria e CPU
+    vb.memory = 16384  # 16GB RAM
+    vb.cpus = 4
+    
+    # Ottimizzazioni
+    vb.customize ["modifyvm", :id, "--ioapic", "on"]
+    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+  end
+  
+  # Configurazione del disco
+  config.vm.disk :disk, size: "50GB", primary: true
+  
+end
