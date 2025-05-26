@@ -43,7 +43,8 @@ Vagrant.configure("2") do |config|
     mkdir -p /home/vagrant/.kube
     k3d kubeconfig write mio-cluster > /home/vagrant/.kube/config
     chown -R vagrant:vagrant /home/vagrant/.kube
-
+	
+    k3d kubeconfig get mio-cluster > /home/vagrant/.kube/config
     echo "Cluster K3d installato e pronto!"
   SHELL
 end
